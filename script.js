@@ -1,59 +1,42 @@
 let neuralNetwork;
-let submitButton;
 
-function setup() {
-  noCanvas();
-
-  let nnOptions = {
-    dataUrl: 'https://raw.githubusercontent.com/wiwichips/MOMU/staging/OurData3small.csv',
-    inputs: ['fare_class', 'sex', 'age', 'fare'],
-    outputs: ['survived'],
-    task: 'classification',
-    debug: true,
-     activationHidden: 'sigmoid', // 'relu', 'tanh'
-  learningRate: 1, // any number!
-  hiddenUnits: 3, // any number!
+// setup
+let nnOptions = {
+  dataUrl: 'https://raw.githubusercontent.com/wiwichips/MOMU/staging/OurData3small.csv',
+  inputs: ['directors', 'runtimeMinutes', 'genres', 'numVotes'],
+  outputs: ['averageRating'],
+  task: 'classification',
+  debug: true,
+  activationHidden: 'sigmoid', // 'relu', 'tanh'
   modelLoss:  'categoricalCrossentropy', // 'meanSquaredError'
-  };
-  
+};
 
+neuralNetwork = ml5.neuralNetwork(nnOptions, modelReady)
 
-  neuralNetwork = ml5.neuralNetwork(nnOptions, modelReady)
-  submitButton = select('#submit');
-  submitButton.mousePressed(classify);
-  submitButton.hide();
-}
-
+// model ready
 function modelReady() {
   neuralNetwork.data.normalize();
   neuralNetwork.train({ epochs: 20 }, whileTraining, finishedTraining);
 }
 
+// epoch
 function whileTraining(epoch, logs) {
   console.log(`Epoch: ${epoch} - loss: ${logs.loss.toFixed(2)}`);
 }
 
 function finishedTraining() {
   console.log('done!');
-  submitButton.show();
   classify();
 }
 
 // TODO: normalize and encode values going into predict?
 function classify() {
-  let age = parseInt(select('#age').value());
-  let fare = parseInt(select('#fare').value());
-  let fare_class = select('#fare_class').value();
-  let sex = select('#sex').value();
+  let directors = 'nm7920254';
+  let runtimeMinutes = 131;
+  let genres = "Action,Crime,Drama";
+  let numVotes = 5492;
 
-  // let inputs = {
-  //   age: age,
-  //   fare: fare,
-  //   fare_class: fare_class,
-  //   sex: sex
-  // };
-
-  let inputs = [fare_class, sex, age, fare];
+  let inputs = [directors, runtimeMinutes, genres, numVotes];
   neuralNetwork.classify(inputs, gotResults);
 }
 
@@ -62,6 +45,6 @@ function gotResults(err, results) {
     console.error(err);
   } else {
     console.log(results);
-    select('#result').html(`prediction: ${results[0].label}`);
+    console.log(`prediction: ${results[0].label}`);
   }
 }
