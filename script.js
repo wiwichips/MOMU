@@ -5,7 +5,7 @@ function setup() {
   noCanvas();
 
   let nnOptions = {
-    dataUrl: 'titanic.csv',
+    dataUrl: 'https://raw.githubusercontent.com/wiwichips/MOMU/staging/OurData3small.csv',
     inputs: ['fare_class', 'sex', 'age', 'fare'],
     outputs: ['survived'],
     task: 'classification',
