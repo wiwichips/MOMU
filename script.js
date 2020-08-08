@@ -1,51 +1,67 @@
+let neuralNetwork;
+let submitButton;
 
-// Options for Neural Network
-const options = {
-  dataUrl: 'https://raw.githubusercontent.com/wiwichips/MOMU/staging/OurData2.csv',
-  inputs: ['startYear','runtimeMinutes','genres','averageRating','numVotes','directors','writers','nconst'],
-  outputs: ['averageRating'],
-  task: 'classification'
+function setup() {
+  noCanvas();
 
-}
+  let nnOptions = {
+    dataUrl: 'titanic.csv',
+    inputs: ['fare_class', 'sex', 'age', 'fare'],
+    outputs: ['survived'],
+    task: 'classification',
+    debug: true,
+     activationHidden: 'sigmoid', // 'relu', 'tanh'
+  learningRate: 1, // any number!
+  hiddenUnits: 3, // any number!
+  modelLoss:  'categoricalCrossentropy', // 'meanSquaredError'
+  };
   
-// Step 2: initialize your neural network
-const nn = ml5.neuralNetwork(options, dataLoaded);
 
-// Step 3: normalize data and train the model
-function dataLoaded(){ //Callback for loading
-  nn.normalizeData();
-  trainModel();
+
+  neuralNetwork = ml5.neuralNetwork(nnOptions, modelReady)
+  submitButton = select('#submit');
+  submitButton.mousePressed(classify);
+  submitButton.hide();
 }
 
-// Step 4: train the model
-function trainModel(){
-  const trainingOptions = {
-    epochs: 8,
-    batchSize: 12
+function modelReady() {
+  neuralNetwork.data.normalize();
+  neuralNetwork.train({ epochs: 20 }, whileTraining, finishedTraining);
+}
+
+function whileTraining(epoch, logs) {
+  console.log(`Epoch: ${epoch} - loss: ${logs.loss.toFixed(2)}`);
+}
+
+function finishedTraining() {
+  console.log('done!');
+  submitButton.show();
+  classify();
+}
+
+// TODO: normalize and encode values going into predict?
+function classify() {
+  let age = parseInt(select('#age').value());
+  let fare = parseInt(select('#fare').value());
+  let fare_class = select('#fare_class').value();
+  let sex = select('#sex').value();
+
+  // let inputs = {
+  //   age: age,
+  //   fare: fare,
+  //   fare_class: fare_class,
+  //   sex: sex
+  // };
+
+  let inputs = [fare_class, sex, age, fare];
+  neuralNetwork.classify(inputs, gotResults);
+}
+
+function gotResults(err, results) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(results);
+    select('#result').html(`prediction: ${results[0].label}`);
   }
-  nn.train(trainingOptions, finishedTraining);
-}
-
-// Step 5: use the trained model
-function finishedTraining(){
-  //classify();
-}
-
-// Step 6: make a classification
-function classify(){
-  const input = {
-    r: 255, 
-    g: 0, 
-    b: 0
-  }
-  nn.classify(input, handleResults);
-}
-
-// Step 7: define a function to handle the results of your classification
-function handleResults(error, result) {
-    if(error){
-      console.error(error);
-      return;
-    }
-    console.log(results); // {label: 'red', confidence: 0.8};
 }
