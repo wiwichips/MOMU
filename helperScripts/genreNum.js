@@ -11,7 +11,7 @@
  * 
  * 
  * 
- * Example to call: console.log(genreNumsToComboNum(genresToNumbers('History,Drama,Fantasy')));
+ * Example to call: console.log(genreNumsToComboNum(genresToNumbers('History,Drama,Fantasy'))); should print 325
  */
 function getComboNumber(csvStr) {
   genreNumsToComboNum(genresToNumbers(csvStr));
