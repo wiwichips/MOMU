@@ -1,0 +1,1 @@
+{"data":{"inputMin":[1915,45,1,10006],"inputMax":[2020,467,2462,2270157],"outputMin":[1],"outputMax":[9.300000190734863]},"meta":{"inputUnits":4,"outputUnits":1,"inputs":{"startYear":{"dtype":"number"},"runtimeMinutes":{"dtype":"number"},"genres":{"dtype":"number"},"numVotes":{"dtype":"number"}},"outputs":{"averageRating":{"dtype":"number"}},"isNormalized":true}}

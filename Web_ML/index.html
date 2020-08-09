@@ -1,0 +1,74 @@
+<!doctype html>
+
+<style>
+.row {
+	
+}
+</style>
+
+<meta charset="utf-8">
+<html>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  
+	<head>
+		<title>MOMU</title>
+		<p style="text-align: center;">M O M U</p>
+	</head>
+      <header className="App-header">
+		
+		<form>
+			<div className="row">
+				<label>
+				Popularity:&nbsp;
+				<input type="text" id="pop"/>
+				&nbsp;
+				</label>
+				
+				<label>
+				Date:&nbsp;
+				<input type="text" id="date" />
+				&nbsp;
+				</label>
+			
+				<label>
+				Runtime:&nbsp;
+				<input type="text" id="runtime" />
+				&nbsp;
+				</label>
+			</div>
+			
+			<div className="row" id="multi">				
+				<label>
+				Genre:&nbsp;
+				<input type="text" id="genre1" />
+				&nbsp;
+				</label>
+				
+				<label>
+				Genre:&nbsp;
+				<input type="text" id="genre2" />
+				&nbsp;
+				</label>
+				
+				<label>
+				Genre:&nbsp;
+				<input type="text" id="genre3" />
+				&nbsp;
+				</label>
+			</div>
+		</form>
+			<div id="bottom">
+				<input type="submit" value="GO" onclick="takeData()"/>
+			</div>
+      </header>
+	
+	<body <--onLoad="loadModel()"-- >
+		 <script src="index.js"></script>
+	</body>
+	
+	<footer>
+	  <p>Willnred 2020<br></br>Information courtesy of IMDb (http://www.imdb.com). Used with permission.</p>
+	  </footer>
+</html>
