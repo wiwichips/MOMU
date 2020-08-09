@@ -69,6 +69,8 @@ function whileTraining(epoch, loss){
 function finishedTraining(){
     //nn.save();
     //classify();
+	alert("Training is Complete");
+	document.getElementById('btn').disabled = false;
 }
 
 function classify() {
@@ -83,7 +85,7 @@ function gotResults(err, results) {
     if (err) {
         console.error(err);
     } else {
-        alert(results[0].value);
+        alert('Score: ' + results[0].value.toFixed(1));
         console.log(results[0].value);
     }
 }
