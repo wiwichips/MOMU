@@ -1,8 +1,47 @@
 <!doctype html>
 
 <style>
-.row {
-	
+.container > div {
+    display: inline-block;
+    display: -moz-inline-box;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 33%;
+    text-align: center;
+}
+
+.center {
+  margin: 0;
+  padding-top: 20px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+}
+
+.footer {
+	position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color:#696969;
+   height: 10%;
+   color: white;
+   text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
 }
 </style>
 
@@ -12,63 +51,70 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
   <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
   
+<div class="background">
 	<head>
 		<title>MOMU</title>
-		<p style="text-align: center;">M O M U</p>
+		<p style="text-align: center; font-size: 106px;">M O M U</p>
+		<br>
 	</head>
-      <header className="App-header">
-		
-		<form>
-			<div className="row">
+      <header>
+		<div class="container">
+			<div>
 				<label>
 				Popularity:&nbsp;
-				<input type="text" id="pop"/>
+				<input style="border-radius: 3px;" type="text" id="pop"/>
 				&nbsp;
 				</label>
-				
+			</div>
+			<div>
 				<label>
-				Date:&nbsp;
-				<input type="text" id="date" />
+				&nbsp;&nbsp;Date:&nbsp;
+				<input style="border-radius: 3px;" type="text" id="date" />
 				&nbsp;
 				</label>
-			
+			</div>
+			<div>
 				<label>
 				Runtime:&nbsp;
-				<input type="text" id="runtime" />
+				<input style="border-radius: 3px;" type="text" id="runtime" />
 				&nbsp;
 				</label>
 			</div>
-			
-			<div className="row" id="multi">				
+		</div>
+		<br>
+		<div class="container">
+			<div>
 				<label>
-				Genre:&nbsp;
-				<input type="text" id="genre1" />
-				&nbsp;
-				</label>
-				
-				<label>
-				Genre:&nbsp;
-				<input type="text" id="genre2" />
-				&nbsp;
-				</label>
-				
-				<label>
-				Genre:&nbsp;
-				<input type="text" id="genre3" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genre:&nbsp;
+				<input style="border-radius: 3px;" type="text" id="genre1" />
 				&nbsp;
 				</label>
 			</div>
-		</form>
-			<div id="bottom">
-				<input type="submit" value="GO" onclick="takeData()"/>
+			<div>			
+				<label>
+				Genre:&nbsp;
+				<input style="border-radius: 3px;" type="text" id="genre2" />
+				&nbsp;
+				</label>
+			</div>
+			<div>
+				<label>
+				&nbsp;&nbsp;&nbsp;Genre:&nbsp;
+				<input style="border-radius: 3px;" type="text" id="genre3" />
+				&nbsp;
+				</label>
+			</div>
+			</div>
+			<div class="center">
+				<input class="button" type="submit" value="GO" onclick="takeData()"/>
 			</div>
       </header>
 	
-	<body <--onLoad="loadModel()"-- >
+	<body style="background-color: 	#202020; color:#F5F5F5;" <--onLoad="loadModel()"-- >
 		 <script src="index.js"></script>
 	</body>
-	
-	<footer>
-	  <p>Willnred 2020<br></br>Information courtesy of IMDb (http://www.imdb.com). Used with permission.</p>
+</div>
+	<div class="footer">
+	  <p>Willnred 2020<br>Information courtesy of IMDb (http://www.imdb.com). Used with permission.</p>
 	  </footer>
 </html>

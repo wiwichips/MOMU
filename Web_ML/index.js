@@ -37,7 +37,7 @@ const options = {
     outputs: ['averageRating'],
     task: 'regression',
     learningRate: 0.1,
-    debug: true
+    //debug: true
 };
 
 // Step 2: initialize your neural network
